@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Sacramento&family=Source+Sans+Pro:wght@600&family=Ubuntu&display=swap');
+
+
+
+.welcome-heading{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.heading-centered{
+    margin: 9rem 0 2rem 0;
+    text-align: center;
+}
+
+.heading-container{
+    max-width: 550px;
+}
