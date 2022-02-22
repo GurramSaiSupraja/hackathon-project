@@ -1,9 +1,11 @@
 import React from 'react'
 import './Home.css'
 import { Outlet, Link } from "react-router-dom";
-
+import Header from '../Header/Header.jsx';
 export default function Home() {
   return (
+    <>
+    <Header/>
     <div className="jumbotron heading-centered">
         <div className="container heading-container">
             <h1 className="display-4 welcome-heading">Welcome to XXXXXXX</h1>
@@ -15,6 +17,7 @@ export default function Home() {
         </div>
         <Outlet />
     </div>
+    </>
   )
 }
  

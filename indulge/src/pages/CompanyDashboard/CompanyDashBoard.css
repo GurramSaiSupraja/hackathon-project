@@ -1,0 +1,65 @@
+.company{
+    background-color: #1a73e8;
+    max-width: 100%;
+    color: #787878;
+}
+.head{
+    background-color: rgb(25, 118, 210);
+    box-shadow:0px 0px 15px 5px lightslategray;
+    
+}
+.companysidebar{
+    background-color: white;
+    height: 100vh;
+}
+.companymainbar{
+    background-color: #F0F0F0;
+    height: 100vh;
+    padding: 0%;
+}
+.mainbar{
+    padding: 50px;
+}
+.nav-bar-items{
+    display: flex;
+    align-items: left;
+}
+.card-company{
+    padding:10px;
+    text-align: center;
+}
+.card-session,
+.card-job,
+.card-courses{
+    padding: 20px;
+    height: 220px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.currenttable{
+    background-color: #fff;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+.table-head{
+    text-align: left;
+    padding-left:30px;
+    padding-top:30px;
+    padding-bottom: 3px;
+}
+.dashboardtable{
+    padding: 30px;
+    padding-top: 2px;
+}
+.table{
+    border-style:hidden;
+    border-color: #D3D3D3;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px 1px #F0F0F0;
+}
+.icon{
+    color: #ffffff;
+}

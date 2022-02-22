@@ -1,11 +1,32 @@
-.register-form{
-    width:50%;
+.form-register{
+    width:25%;
     display: block;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 4%;
+    border: 0.5px gray;
+    box-shadow:  0px 0px 10px 1px gray;
+    padding: 10px;
     
 }
-
+.register-heading{
+    display: block;
+    margin: auto;
+    margin-top: 2%;
+}
 .form-group{
     display: inline;
+}
+.label-name{
+    font-size: 15px;
+    font-weight: 500;
+    display:flex;
+}
+.register-button{
+    margin:5px;
+}
+@media screen and (max-width: 800px){
+    .form-register{
+        width: 80%;
+        height: 50%;
+    }
 }
