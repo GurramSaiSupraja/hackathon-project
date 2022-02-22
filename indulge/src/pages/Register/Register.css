@@ -23,10 +23,22 @@
 }
 .register-button{
     margin:5px;
+    display: block;
+    margin: 5px auto;
 }
 @media screen and (max-width: 800px){
     .form-register{
         width: 80%;
         height: 50%;
     }
+}
+
+
+.back-btn{
+    border: hidden;
+    text-decoration: underline;
+}
+
+.back-btn:hover {
+    color: blue;
 }

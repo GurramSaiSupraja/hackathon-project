@@ -21,14 +21,28 @@
 .login-button{
     margin:5px;
     width: 25%;
+    display: block;
+    margin: 10px auto;
 }
 form{
     display: block;
     margin: auto;
 }
-@media screen and (max-width: 800px){
+
+.login-back-btn{
+    border: hidden;
+    text-decoration: underline;
+}
+
+.login-back-btn:hover {
+    color: blue;
+}
+
+@media screen and (max-width: 400px){
     .login-form{
         width: 80%;
         height: 50%;
     }
 }
+
+
