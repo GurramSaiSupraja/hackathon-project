@@ -1,0 +1,28 @@
+
+.container{
+  border-radius: 10px;
+  border: none;
+  background-color: #E7F2F8;
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  text-align: center;
+  font-family: "Open Sans","sans-serif";
+}
+
+.header{
+  border-radius: 10px;
+  border: none;
+  background-color: #74BDCB;
+  font-family: "Open Sans", sans-serif;
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  text-align: center;
+}
+
+.fcontainer{
+  padding-left: 20%;
+  
+  
+}
