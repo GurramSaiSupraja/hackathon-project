@@ -5,12 +5,20 @@ import { Outlet, Link, useNavigate} from "react-router-dom";
 import CreatableDropdown, { company } from '../Dropdown/CreatableDropdown.jsx';
 import { company as companyName } from '../Dropdown/CreatableDropdown.jsx';
 import Header from '../Header/Header.jsx';
+import { useForm } from "react-hook-form";
 import { ConnectedTvOutlined, WindowRounded } from '@mui/icons-material';
 import { ThemeContext } from '@emotion/react';
 
 
 
 export default function Register() {
+   
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm();
 
   const [companyData, setData] = React.useState([]);
 
@@ -32,28 +40,17 @@ export default function Register() {
   },[]);
    
  
-  const [companyValue, setCompanyValue] = React.useState("");
-  const [emailValue, setEmail] = React.useState("");
-  const [passwordValue, setPassword] = React.useState("");
-  const [cpasswordValue, setCPassword] = React.useState("");
+  
   
   const navigate = useNavigate();
 
-  function onSubmit(e){
-      console.log(
-        companyName.value, emailValue, passwordValue, cpasswordValue
-      );
-      const inValidRegex = /^[a-zA-Z0-9.]+@(gmail.com)$/; 
-      const email = emailValue.trim();
-      if(email.toLowerCase().match(inValidRegex)){
-        console.log("Invalid email");
-        setEmail("");
-      }
+  function onSubmit(data){
+      
       const companyname =  companyName.label;
       const companyDetails = {
-          companyname: companyname,
-          username: emailValue,
-          password: passwordValue 
+          companyname: data.companyname,
+          username: data.emailValue,
+          password: data.passwordValue 
       };
 
       
@@ -63,9 +60,9 @@ export default function Register() {
       }
       );
 
-      e.preventDefault();
+      data.preventDefault();
 
-  }
+  };
 
 
   return (
@@ -76,7 +73,7 @@ export default function Register() {
              <h1>Register</h1>
         </div>
         <div className='form-register'>
-            <form onSubmit={(e) => onSubmit(e)} >
+            <form onSubmit={handleSubmit(onSubmit)} >
                <div className="form-group">
                    <label className="label-name" for="company-name">Company Name</label>
                    {/* <input type="text" className="form-control" name="companyname" required placeholder='Enter Company name'/> */}
@@ -84,19 +81,59 @@ export default function Register() {
                 </div>
                 <div className="form-group">
                     <label className="label-name"for="email">Email</label>
-                    <input type="email" className="form-control" name="username" required placeholder='Enter company email'  onChange={e => setEmail(e.target.value)} />
+                    <input type="text" className="form-control" name="username" required placeholder='Enter company email'
+                        {...register("email", {
+                          required: true,
+                          maxLength: 320,
+                          pattern: /^([A-Za-z]+)([A-Za-z0-9]+)@([a-zA-z/.]+)$/i,
+                        })} 
+                    />
+                    <div className='styleerrors'>
+                            {errors?.email?.type === "required" && <p>*This field is required</p>}
+                              {errors?.email?.type === "maxLength" && (
+                                <p>*email cannot exceed 320 characters</p>
+                              )}
+                              {errors?.email?.type === "pattern" && (
+                                <p>*enter company mail only</p>
+                              )}
+                    </div>
                 </div>
                 <div className="form-group">
                     <label className="label-name" for="password">Password</label>
-                    <input type="password" className="form-control" name="password" required placeholder='password'  onChange={e => setPassword(e.target.value)}/>
+                    <input type="password" className="form-control" name="password" required placeholder='password'
+                         {...register("password", {
+                          required: true,
+                          pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/i,
+                         
+                        })}  
+                    />
+                     <div className='styleerrors'>
+                      
+                      
+                      {errors?.password?.type === "required" && <p>*This field is required</p>}
+                      
+                      {errors?.password?.type === "pattern" && (
+                        <p>*password should contain atleast one uppercase,one lowercase,one symbol,one numerical and minimumlength 8</p>
+                      )}
+                </div>
                 </div>
                 <div className="form-group">
                     <label className="label-name" for="confirmation">Confirm Password</label>
-                    <input type="password" className="form-control" name="cnfm-password" required placeholder='comfirm password' onChange={e => setCPassword(e.target.value)}/>
+                    <input type="password" className="form-control" name="cnfm-password" required placeholder='comfirm password'
+                       {...register("cnfmpassword", {
+                        required: true,
+                       
+                      })}  
+                    />
+                </div>
+                <div className='styleerrors'>
+                      
                 </div>
                 
                 <button  type="submit" className="btn btn-dark register-button">Register</button>
                 <Link to="/" className="back-btn" >back</Link>
+
+               
             </form>
           </div>
     </div>

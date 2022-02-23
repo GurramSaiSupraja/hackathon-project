@@ -26,6 +26,10 @@
     display: block;
     margin: 5px auto;
 }
+.styleerrors{
+    color: red;
+    font-size: small;
+}
 @media screen and (max-width: 800px){
     .form-register{
         width: 80%;
