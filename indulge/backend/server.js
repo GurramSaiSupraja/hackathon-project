@@ -7,6 +7,9 @@ import mongoose from 'mongoose';
 import Company from './companySchema.js';
 import Course from './courseSchema.js';
 import infSchema  from './infSchema.js';
+import session from 'express-session';
+import passport from 'passport';
+import passportLocalMongoose from 'passport-local-mongoose';
 
 
 const app = express();
@@ -15,10 +18,34 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
     origin: "http://localhost:3000"
 }))
+
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  }))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose.connect("mongodb://localhost:27017/indulgeDB");
 
-
 const Inf =  mongoose.model("Inf",infSchema);
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+});
+
+userSchema.plugin(passportLocalMongoose);
+
+const User = new mongoose.model("User", userSchema);
+
+passport.use(User.createStrategy());
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //register page
 
@@ -41,10 +68,10 @@ app.get("/register", function(req, res){
 app.post("/register", function(req, res){
     console.log(req.body);
     let newCompany;
-    const user = {
+    const user = new User( {
         username:req.body.username,
         password:req.body.password
-    }
+    });
     Company.findOne({name:req.body.companyname},function(err, foundCompany){
         if(err){
             console.log(err);
@@ -61,30 +88,32 @@ app.post("/register", function(req, res){
             newCompany.users.forEach((user)=>{
                 existingUsers.push(user.username);
             })
-            console.log("existing users "+newCompany.users);
+            console.log(newCompany);
             if(existingUsers.includes(user.username)){
                 console.log("User "+user.username+" already exists.");
             }
             else{
-                newCompany.users.push({
-                    username:req.body.username,
-                    password:req.body.password,
-                    date:new Date()});
-                newCompany.save(function(err){
+                User.register({username: req.body.username, date: new Date()}, req.body.password, function(err, user){
                     if(err){
                         console.log(err);
                     }else{
-                         console.log("The user "+user.username + " got registered!");
-                         res.send(newCompany);
-                    }    
-                    });
+                        console.log(user);
+                        newCompany.users.push(user);
+                        newCompany.save(function(err){
+                            if(err){
+                               console.log(err);
+                            }else{
+                                passport.authenticate('local')(req, res, function(){
+                                    res.send(newCompany);
+                                 });    
+                            }
+                        })
+                       
+                    }
+                })
             }
-            
         }
-    })
-
-    
-   
+    })  
 });
 
 
@@ -95,28 +124,23 @@ app.get("/login", function(req, res){
 })
 
 app.post("/login", function(req, res){
-    console.log(req.body);
+    
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password,
+    })
+    console.log(user);
+    
     Company.findOne({name: req.body.companyname},function(err, foundCompany){
         if(!err){
-            if(foundCompany){
-                console.log("found users:"+ foundCompany.users);
-                const user = foundCompany.users.filter((user)=>{
-                    return (user.username === req.body.username);
-                    });
-                if(user.length == 1){
-                    if(user[0].password === req.body.password){
-                        console.log("Logged in!!");
-                        res.send(foundCompany.id);
-                    }
-                    else{
-                        console.log("incorrect password."+ user[0].password + " "+req.body.password);
-                    }
-                }else if(user.length == 0 ){
-                    console.log("no user found, please register!");
+            req.login(user, function(err){
+                if(!err){
+                    passport.authenticate('local')(req, res, function(){
+                        res.send(foundCompany.id);                         }); 
+                }else{
+                        console.log("invalid username or password");
                 }
-            }else{
-                console.log("No user found, please register");
-            }
+            })
         }
         else{
             console.log(err);
@@ -128,14 +152,17 @@ app.post("/login", function(req, res){
 //Dashboard
 
 app.get("/CompanyDashboard/:companyName",function(req, res) {
-    const companyName = req.params.companyName;
-    Company.findOne({name:companyName},function(err, foundCompany){
-        if(err){
-            console.log(err);
-        }else{
-            res.send(foundCompany.infs);
-        }
-    })
+    if(req.isAuthenticated()){
+        const companyName = req.params.companyName;
+        Company.findOne({name:companyName},function(err, foundCompany){
+            if(err){
+                console.log(err);
+            }else{
+                res.send(foundCompany.infs);
+            }
+        })
+    }
+    
 })
 
 
@@ -162,15 +189,16 @@ app.post("/add-new-inf", function(req, res){
                 season:req.body.season,
                 role:req.body.role,
                 date: new Date()
-            }); 
-            console.log(foundCompany);
-            // foundCompany.infs.push(newInf);
-            // foundCompany.save(function(err){
-            //     if(err)
-            //     console.log(err);
-            //     else
-            //     console.log("successfully added inf");
-            // })
+            });
+            foundCompany.infs.push(newInf);
+            foundCompany.save(function(err){
+                if(err)
+                console.log(err);
+                else{
+                console.log("successfully added inf");
+                res.send(newInf);
+                }
+            })
         }
     })    
 

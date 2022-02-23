@@ -4,7 +4,7 @@ import jnfSchema from './jnfSchema.js';
 
 const userSchema = mongoose.Schema(
     {username:String,
-    password:String,
+    date: String
     }
 );
 
