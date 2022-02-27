@@ -7,6 +7,7 @@ import {BrowserRouter, Routes, Route,Switch } from "react-router-dom";
 import ReactDOM from "react-dom";
 import Login from '../pages/Login/Login';
 import CompanyDashboard from '../pages/CompanyDashboard/CompanyDashboard.jsx';
+import JnfForm from '../pages/jnf/JnfForm';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login></Login>} />
             <Route path="/dashboard/:companyId" element={<CompanyDashboard></CompanyDashboard>}></Route>
+            <Route path="/create-jnf" element={<JnfForm></JnfForm>} />
           </Routes>
         
         </div> 

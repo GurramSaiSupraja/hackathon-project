@@ -21,7 +21,7 @@ app.use(cors({
 
 
 app.use(session({
-    secret: process.env.SECRET,
+    secret: "This is secret",
     resave: false,
     saveUninitialized: false
   }))
@@ -31,7 +31,7 @@ app.use(passport.session());
 
 mongoose.connect("mongodb://localhost:27017/indulgeDB");
 
-const Inf =  mongoose.model("Inf",infSchema);
+const Inf =  mongoose.model("Inf", infSchema);
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,

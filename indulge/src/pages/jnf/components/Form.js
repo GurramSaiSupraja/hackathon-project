@@ -4,14 +4,14 @@ const Form = () => {
     return (
         <div>
 
-            <div className="fcontainer">
-                <div className="header">
+            <div className="fcontainer fcontainer-jnf">
+                <div className="header header-jnf">
                     Job Notification Form(2021-22)
                 </div>
-                <div className="header">
+                <div className="header header-jnf">
                     Company overview
                 </div>
-                <div className="container">
+                <div className="container container-jnf">
                     <label>Name</label>
                     <input type="text" /><br />
                     <label>Website</label>
@@ -19,20 +19,20 @@ const Form = () => {
                     <label>Category/sector</label>
                     <input type="text" /><br />
                 </div>
-                <div className="header">
+                <div className="header header-jnf">
                     JOB DETAILS
                 </div>
-                <div className="container">
+                <div className="container container-jnf">
                     <label>Designation</label>
                     <input type="text" /><br />
                     <label>Job description</label>
                     <input type="text" /><br />
 
                 </div>
-                <div className="header">
+                <div className="header header-jnf">
                     SALARY DETAILS
                 </div>
-                <div className="container">
+                <div className="container container-jnf">
                     <label>CTC(in LPA)</label>
                     <input type="text" /><br />
                     <label>CTC Breakup</label>
@@ -41,10 +41,10 @@ const Form = () => {
                     <input type="text" /><br />
                 </div>
                 
-           <div className="header">
+           <div className="header header-jnf">
            CONTACT PERSONNEL DETAILS
                 </div>
-                <div className="container">
+                <div className="container container-jnf">
                     <table >
                         <tr>
                          <td> </td>
@@ -73,10 +73,10 @@ const Form = () => {
                         </tr>
                     </table>
                 </div>
-                <div className="header">
+                <div className="header header-jnf">
            SELECTION PROCEDURE
                 </div>
-                <div className="container">
+                <div className="container container-jnf">
                     <label>Resume shortlisting  : </label>
                     <input type="radio"></input>                  
                     <label>Yes</label>
@@ -108,10 +108,10 @@ const Form = () => {
                     <label>Eligibility Criteria (if any)</label>
                     <input type="text" /><br />
                 </div>
-                <div className="header">
+                <div className="header header-jnf">
                 ELIGIBLE COURSES & DISCIPLINES
                 </div>
-                <div className="container">
+                <div className="container container-jnf">
                 (List of courses and disciplines offered at IIT (ISM) are shown below. Please highlight or check by clicking as per your requirement)
            </div>
             </div>
