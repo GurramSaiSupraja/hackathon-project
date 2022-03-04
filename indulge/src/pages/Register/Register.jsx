@@ -22,7 +22,7 @@ export default function Register() {
 
   const [companyData, setData] = React.useState([]);
 
-  React.useEffect(()=> {
+  useEffect(()=> {
     axios.get("http://localhost:5000/register").then(
       response => {console.log(response);
         const tempArray=[];

@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './CompanyDashboard.css'
 import HomeIcon from '@mui/icons-material/Home';
 import CompanyTable from './CompanyTable';
+import { useParams } from "react-router-dom";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
+
 export default function CompanyDashboard() {
+
+      let {companyId} = useParams();
       return (
             <div className='company'>
                   <div className='row'>
@@ -58,9 +62,9 @@ export default function CompanyDashboard() {
                                           </div>
                                     </div>
                                     <div className='currenttable'>
-                                          <div className='table-head'><h4>submitted INFs&JNFs</h4></div>
+                                          <div className='table-head'><h4>Submitted Forms</h4></div>
                                           <div className='dashboardtable'>
-                                                <CompanyTable />
+                                                <CompanyTable companyId={companyId}/>
                                           </div>
                                     </div>
                               </div>
