@@ -46,11 +46,12 @@ export default function Register() {
 
   function onSubmit(data){
       
+    console.log("Submitted");
       const companyname =  companyName.label;
       const companyDetails = {
-          companyname: data.companyname,
-          username: data.emailValue,
-          password: data.passwordValue 
+          companyname: companyname,
+          username: data.email,
+          password: data.password 
       };
 
       
@@ -60,7 +61,7 @@ export default function Register() {
       }
       );
 
-      data.preventDefault();
+      // preventDefault();
 
   };
 

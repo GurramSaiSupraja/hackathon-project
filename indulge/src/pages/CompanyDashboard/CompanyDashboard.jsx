@@ -1,18 +1,20 @@
 import React from 'react'
 import './CompanyDashboard.css'
 import HomeIcon from '@mui/icons-material/Home';
-import CompanyTable from './CompanyTable';
+import CompanyTable from './CompanyTable.jsx';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AddIcon from '@mui/icons-material/Add';
+import { Outlet, Link } from "react-router-dom";
+// import { useState } from 'react';
+
 
 
 export default function CompanyDashboard() {
       return (
             <div className='company'>
                   <div className='row'>
-                        {/* <div className='col-2 companysidebar'>
-                    <h3>IIT ISM Dhanbad</h3>
-                </div> */}
+                        
                         <div className='col-12 companymainbar'>
                               <nav class="head navbar navbar-expand-lg" >
                                     <div class=" container-fluid">
@@ -41,22 +43,29 @@ export default function CompanyDashboard() {
                               </nav>
                               <div className='mainbar'>
                                     <div className='row company-main'>
-                                          <div className='col-sm-12 col-md-4 card-company'>
-                                                <div className='card-session'>
-                                                      <h1>header</h1>
-                                                </div>
+                                         <div className='col-sm-12 col-md-4 card-company'>
+                                         <Link to="curr-session"> <div className='card-session '>
+                                                    <h3 className='curr-session-head'>Current session:</h3>
+                                                    <h3>2023-24</h3>
+                                                            
+                                              </div></Link>
                                           </div>
                                           <div className='col-sm-12 col-md-4 card-company'>
-                                                <div className=' card-courses'>
-                                                      <h1>header</h1>
-                                                </div>
+                                             <Link to="addinf"><div className=' card-courses'>
+                                                      <h3>Add INF</h3>
+                                                      <AddIcon className='ad-icon'/>
+                                                </div></Link>
                                           </div>
-                                          <div className='col-sm-12 col-md-4 card-company'>
-                                                <div className='card-job'>
-                                                      <h1>header</h1>
-                                                </div>
+                                          <div className='col-sm-12 col-md-4 card-company '>
+                                              <Link to="addjnf"> <div className='card-job '>
+                                                      <h3>Add JNF</h3>
+                                                      <AddIcon className='ad-icon'/>
+                                                </div></Link>
+                                                
                                           </div>
+                                          
                                     </div>
+                                    
                                     <div className='currenttable'>
                                           <div className='table-head'><h4>submitted INFs&JNFs</h4></div>
                                           <div className='dashboardtable'>
@@ -65,7 +74,10 @@ export default function CompanyDashboard() {
                                     </div>
                               </div>
                         </div>
+                        
                   </div>
+                  
+                  <Outlet/>
             </div>
       );
 }

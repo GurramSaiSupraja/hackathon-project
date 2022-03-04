@@ -8,7 +8,7 @@ import Secondyrmba from './components/secondyrmba'
 import Secondyrmsc from './components/secondyrmsc'
 import Secondyrmtech from './components/secondyrmtech'
 import Phd from './components/phd'
-const App = () => {
+const Inf = () => {
   return (
     <div>
 
@@ -25,4 +25,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Inf

@@ -42,7 +42,7 @@ export default function Login() {
     axios.post("http://localhost:5000/login", userDetails).then(
         res => {console.log("Data: " + JSON.stringify(res.data));
           const companyId = res.data;
-          navigate("/dashboard/" + companyId);
+          navigate("/" + companyId);
       }
       );
 

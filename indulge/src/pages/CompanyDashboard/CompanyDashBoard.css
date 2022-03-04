@@ -6,7 +6,6 @@
 .head{
     background-color: rgb(25, 118, 210);
     box-shadow:0px 0px 15px 5px lightslategray;
-    
 }
 .companysidebar{
     background-color: white;
@@ -27,18 +26,27 @@
 .card-company{
     padding:10px;
     text-align: center;
+   
 }
 .card-session,
 .card-job,
 .card-courses{
     padding: 20px;
     height: 220px;
-    background-color: white;
+    background-color: rgba(26, 115, 232,0.8);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #ffffff;
+    
 }
+.card-session:hover,
+.card-job:hover,
+.card-courses:hover{
+    box-shadow:2px 2px 5px 6px lightgray;
+}
+
 .currenttable{
     background-color: #fff;
     margin-top: 30px;
@@ -60,6 +68,18 @@
     box-sizing: border-box;
     box-shadow: 0px 0px 5px 1px #F0F0F0;
 }
+.add-icon {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+}
+.add-icon:hover{
+    color: white;
+}
+.add-icon{
+    width: 25px;
+}
+
 .icon{
     color: #ffffff;
 }
