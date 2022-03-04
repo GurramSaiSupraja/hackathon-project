@@ -22,7 +22,7 @@ export default function Register() {
 
   const [companyData, setData] = React.useState([]);
 
-  React.useEffect(()=> {
+  useEffect(()=> {
     axios.get("http://localhost:5000/register").then(
       response => {console.log(response);
         const tempArray=[];
@@ -45,8 +45,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   function onSubmit(data){
-      
-    console.log("Submitted");
+      console.log(data);  
+
       const companyname =  companyName.label;
       const companyDetails = {
           companyname: companyname,
@@ -54,14 +54,14 @@ export default function Register() {
           password: data.password 
       };
 
-      
+      console.log("Submitted details:" + companyDetails.companyname + " "+companyDetails.username);
       axios.post("http://localhost:5000/register", companyDetails).then(
         res => {console.log("Data: " + res.data)
           navigate("/login");
       }
       );
 
-      // preventDefault();
+      // data.preventDefault();
 
   };
 
@@ -82,11 +82,11 @@ export default function Register() {
                 </div>
                 <div className="form-group">
                     <label className="label-name"for="email">Email</label>
-                    <input type="text" className="form-control" name="username" required placeholder='Enter company email'
+                    <input type="email" className="form-control" name="username" required placeholder='Enter company email'
                         {...register("email", {
                           required: true,
                           maxLength: 320,
-                          pattern: /^([A-Za-z]+)([A-Za-z0-9]+)@([a-zA-z/.]+)$/i,
+                          // pattern: /^([A-Za-z]+)([A-Za-z0-9]+)@([a-zA-z/.]+)$/i,
                         })} 
                     />
                     <div className='styleerrors'>
@@ -94,9 +94,9 @@ export default function Register() {
                               {errors?.email?.type === "maxLength" && (
                                 <p>*email cannot exceed 320 characters</p>
                               )}
-                              {errors?.email?.type === "pattern" && (
+                              {/* {errors?.email?.type === "pattern" && (
                                 <p>*enter company mail only</p>
-                              )}
+                              )} */}
                     </div>
                 </div>
                 <div className="form-group">

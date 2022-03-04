@@ -1,5 +1,5 @@
 
-.container{
+.container-jnf{
   border-radius: 10px;
   border: none;
   background-color: #E7F2F8;
@@ -10,7 +10,7 @@
   font-family: "Open Sans","sans-serif";
 }
 
-.header{
+.header-jnf{
   border-radius: 10px;
   border: none;
   background-color: #74BDCB;
@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-.fcontainer{
+.fcontainer-jnf{
   padding-left: 20%;
   
   

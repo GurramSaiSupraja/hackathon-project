@@ -1,5 +1,5 @@
 
-.container{
+.inf-container{
   border-radius: 10px;
   border: none;
   background-color: #E7F2F8;
@@ -10,7 +10,7 @@
   font-family: "Open Sans","sans-serif";
 }
 
-.header{
+.inf-header{
   border-radius: 10px;
   border: none;
   background-color: #74BDCB;
@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-.fcontainer{
+.inf-fcontainer{
   padding-left: 20%;
   
   

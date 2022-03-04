@@ -8,6 +8,9 @@ import Secondyrmba from './components/secondyrmba'
 import Secondyrmsc from './components/secondyrmsc'
 import Secondyrmtech from './components/secondyrmtech'
 import Phd from './components/phd'
+import './jnfForm.css';
+
+
 const Jnf = () => {
   return (
     <div>
@@ -24,5 +27,6 @@ const Jnf = () => {
     </div>
   )
 }
+
 
 export default Jnf

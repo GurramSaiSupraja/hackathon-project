@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import Company from './companySchema.js';
 import Course from './courseSchema.js';
 import infSchema  from './infSchema.js';
+import jnfSchema  from './jnfSchema.js';
 import session from 'express-session';
 import passport from 'passport';
 import passportLocalMongoose from 'passport-local-mongoose';
@@ -31,7 +32,8 @@ app.use(passport.session());
 
 mongoose.connect("mongodb://localhost:27017/indulgeDB");
 
-const Inf =  mongoose.model("Inf",infSchema);
+const Inf =  mongoose.model("Inf", infSchema);
+const Jnf =  mongoose.model("Jnf", jnfSchema);
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
@@ -136,6 +138,7 @@ app.post("/login", function(req, res){
             req.login(user, function(err){
                 if(!err){
                     passport.authenticate('local')(req, res, function(){
+                        console.log(foundCompany.id);
                         res.send(foundCompany.id);                         }); 
                 }else{
                         console.log("invalid username or password");
@@ -151,20 +154,80 @@ app.post("/login", function(req, res){
 
 //Dashboard
 
-app.get("/CompanyDashboard/:companyName",function(req, res) {
-    if(req.isAuthenticated()){
-        const companyName = req.params.companyName;
-        Company.findOne({name:companyName},function(err, foundCompany){
+app.get("/CompanyDashboard/:companyId",function(req, res) {
+    // if(req.isAuthenticated()){
+        const companyId = req.params.companyId;
+        console.log(companyId);
+        Company.findOne({_id:companyId},function(err, foundCompany){
             if(err){
                 console.log(err);
             }else{
-                res.send(foundCompany.infs);
+                var submittedForms=[];
+                console.log(foundCompany);
+                foundCompany.infs.forEach((inf) => {
+                    var form = new Object();
+
+                        form.formType= "INF",
+                        form.role= inf.role,
+                        form.season= inf.season,
+                        form.date= inf.date
+                    
+                    submittedForms.push(form);
+                    console.log("inf");
+                });
+                foundCompany.jnfs.forEach((jnf) => {
+                    var form = {
+                        formType: "JNF",
+                        role: jnf.role,
+                        season: jnf.season,
+                        date: jnf.date
+                    }
+                    submittedForms.push(form);
+                    // console.log("inf");
+                });
+                submittedForms.sort((a,b) => {
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                    return new Date(b.date) - new Date(a.date);
+                  });
+                res.send(submittedForms);
             }
         })
-    }
+    // }
+    // else{
+    //     console.log(req);
+    // }
     
 })
 
+
+app.get("/AdminDashboard", function(req, res){
+    // if(req.isAuthenticated()){
+        Company.find({}, function(err, allCompanies){
+            if(!err){
+                let companies=[];
+                allCompanies.forEach(company => {
+                    companies.push(company.name);
+                })
+                res.send(companies);
+            }else{
+                console.log(err);
+            }
+        })
+
+    // }
+})
+
+
+app.get("/AdminDashboard/:companyId", function(req, res){
+    // if(req.isAuthenticated()){
+        let companyId = req.params.companyId;
+        console.log(companyId);
+        res.redirect("/CompanyDashboard/"+companyId);
+    // }
+
+
+})
 
 //INF
 
@@ -184,8 +247,9 @@ app.post("/add-new-inf", function(req, res){
         if(err){
             console.log(err);
         }else{
+            console.log(foundCompany);
             const newInf = new Inf ({
-                companyname:req.body.companyName,
+                companyname:companyName,
                 season:req.body.season,
                 role:req.body.role,
                 date: new Date()
@@ -206,6 +270,8 @@ app.post("/add-new-inf", function(req, res){
 });
 
 
+
+
 //jnf
 
 app.get("/add-new-jnf", function(req, res){
@@ -215,6 +281,35 @@ app.get("/add-new-jnf", function(req, res){
         else
         console.log(err);
     })
+});
+
+app.post("/add-new-jnf", function(req, res){
+    const companyName = req.body.companyName;
+    console.log(companyName);
+    Company.findOne({name: companyName}, function(err, foundCompany){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(foundCompany);
+            const newJnf = new Jnf ({
+                companyname:companyName,
+                season:req.body.season,
+                role:req.body.role,
+                date: new Date()
+            });
+            foundCompany.jnfs.push(newJnf);
+            foundCompany.save(function(err){
+                if(err)
+                console.log(err);
+                else{
+                console.log("successfully added inf");
+                res.send(newJnf);
+                }
+            })
+        }
+    })    
+
+
 });
 
 

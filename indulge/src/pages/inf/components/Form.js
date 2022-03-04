@@ -4,15 +4,15 @@ const Form = () => {
     return (
         <div>
 
-            <div className="fcontainer">
-                <div className="header">
+            <div className="inf-container">
+                <div className="inf-header">
                     INTERNSHIP NOTIFICATION FORM(2021-22)
                     <u/>
                 </div>
-                <div className="header">
+                <div className="inf-header">
                     Company overview
                 </div>
-                <div className="container">
+                <div className="inf-container">
                     <label>Name of Company</label>
                     <input type="text" /><br />
                     <label>Category/sector</label>
@@ -20,7 +20,7 @@ const Form = () => {
                     <label>Website</label>
                     <input type="text" /><br />
                 </div>
-                <div className="header">
+                <div className="inf-header">
                     INTERN PROFILE
                 </div>
                     <label>Job Designation</label>
@@ -32,10 +32,10 @@ const Form = () => {
                     <label>Place of Posting(In case of physical internship)</label>
                     <input type="text" /><br />
                 </div>
-                <div className="header">
+                <div className="inf-header">
                     STIPEND DETAILS
                 </div>
-                <div className="container">
+                <div className="inf-container">
                     <label>Stipend per month</label>
                     <input type="text" /><br />
                     <label>PPO provision on performance basis (Yes / No)</label>
@@ -44,10 +44,10 @@ const Form = () => {
                     <input type="text" /><br />
                 </div>
                 
-           <div className="header">
+           <div className="inf-header">
            CONTACT PERSONNEL DETAILS
                 </div>
-                <div className="container">
+                <div className="inf-container">
                     <table >
                         <tr>
                          <td> </td>
@@ -76,10 +76,10 @@ const Form = () => {
                         </tr>
                     </table>
                 </div>
-                <div className="header">
+                <div className="inf-header">
            SELECTION PROCEDURE
                 </div>
-                <div className="container">
+                <div className="inf-container">
                     <label>Resume shortlisting  : </label>
                     <input type="radio"></input>                  
                     <label>Yes</label>
@@ -111,10 +111,10 @@ const Form = () => {
                     <label>Eligibility Criteria (if any)</label>
                     <input type="text" /><br />
                 </div>
-                <div className="header">
+                <div className="inf-header">
                 ELIGIBLE COURSES & DISCIPLINES
                 </div>
-                <div className="container">
+                <div className="inf-container">
                 (List of courses and disciplines offered at IIT (ISM) are shown below. Please highlight or check by clicking as per your requirement)
            </div>
             </div>

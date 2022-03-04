@@ -5,6 +5,9 @@ import Dropdown from '../Dropdown/Dropdown.jsx';
 import { company as companyName } from '../Dropdown/Dropdown.jsx';
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import Header from '../Header/Header.jsx';
+
+
+var companyId;
 export default function Login() {
 
   const [companyData, setData] = React.useState([]);
@@ -29,7 +32,6 @@ export default function Login() {
   
   const [emailValue, setEmail] = React.useState("");
   const [passwordValue, setPassword] = React.useState("");
-  const companyValue = companyName.value;
   const navigate = useNavigate();
 
   function validateLogin(e){
@@ -80,3 +82,6 @@ export default function Login() {
     </div>
   )
 }
+
+export {companyId};
+
