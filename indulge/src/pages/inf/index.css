@@ -1,28 +1,43 @@
 
-.inf-container{
+.container{
   border-radius: 10px;
   border: none;
   background-color: #E7F2F8;
   padding: 10px;
   margin: 10px;
-  width: 70%;
-  text-align: center;
+  /* width: 70%; */
+  /* text-align: center; */
+  font-size: 20px;
   font-family: "Open Sans","sans-serif";
+  
 }
 
-.inf-header{
+.header{
   border-radius: 10px;
   border: none;
   background-color: #74BDCB;
   font-family: "Open Sans", sans-serif;
   padding: 10px;
   margin: 10px;
-  width: 70%;
+  /* width: 70%; */
   text-align: center;
+  font-size: 20px;
 }
 
-.inf-fcontainer{
+.fcontainer{
   padding-left: 20%;
   
   
+}
+
+label{
+  margin:10px;
+  float: left;
+}
+
+input{
+  margin:10px;
+  border-radius: 5px;
+  border-color: #74BDCB;
+  padding: 5px;
 }

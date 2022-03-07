@@ -8,9 +8,7 @@ import Secondyrmba from './components/secondyrmba'
 import Secondyrmsc from './components/secondyrmsc'
 import Secondyrmtech from './components/secondyrmtech'
 import Phd from './components/phd'
-import './infForm.css'
-
-const Inf = () => {
+const App = () => {
   return (
     <div>
 
@@ -27,4 +25,4 @@ const Inf = () => {
   )
 }
 
-export default Inf
+export default App
